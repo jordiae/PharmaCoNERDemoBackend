@@ -3,14 +3,14 @@ import random
 import string
 import time
 import shutil
-PHARMACONER_PATH = '/home/jordiae/Documents/PharmacoNERTask/FarmacoNER/src/CustomNeuroNER/'
+PHARMACONER_PATH = '/srv/PharmaCoNERTaggerDemo/PlanTL-PharmacoNER' # '/home/jordiae/Documents/PharmacoNERTask/FarmacoNER/src/CustomNeuroNER/'
 VENV_PYTHON_PATH = os.path.join(PHARMACONER_PATH, 'bin', 'python')
 DATA_PATH = os.path.join(PHARMACONER_PATH, 'data')
 # OUTPUT_PATH = os.path.join(PHARMACONER_PATH, 'output')
-OUTPUT_PATH = '/home/jordiae/Documents/PharmacoNERTask/FarmacoNER/task/deploy_test_output2'
+OUTPUT_PATH = '/srv/PharmaCoNERTaggerDemo/demos_output' # '/home/jordiae/Documents/PharmacoNERTask/FarmacoNER/task/deploy_test_output2'
 # PARAMETERS_PATH = 'pharmaconer_deploy_parameters.ini'
-PARAMETERS_PATH = os.path.join('/home/jordiae/PycharmProjects/PharmaCoNERDemoBackend', 'pharmaconer_deploy_parameters'
-                                                                                       '.ini')
+PARAMETERS_PATH = '/srv/PharmaCoNERTaggerDemo/PharmaCoNERDemoBackend/pharmaconer_deploy_parameters.ini'# os.path.join('/home/jordiae/PycharmProjects/PharmaCoNERDemoBackend', 'pharmaconer_deploy_parameters'
+#                                                                                       '.ini')
 PHARMACONER_COMMAND = VENV_PYTHON_PATH + ' ' + os.path.join(PHARMACONER_PATH, 'src', 'main.py') +\
                       ' --parameters_filepath ' + PARAMETERS_PATH + ' --dataset_text_folder '
 
