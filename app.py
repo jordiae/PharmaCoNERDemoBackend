@@ -58,7 +58,7 @@ def api_submit():
     """Submit form with text to tag, returns JSON"""
     result = request.form
     output = pharmaCoNERRunner.run(result['inputText'])
-    return jsonify(status=output['success'], data=output['data'], message=output['message'])
+    return jsonify(success=output['success'], data=output['data'], message=output['message'])
 
 
 '''
