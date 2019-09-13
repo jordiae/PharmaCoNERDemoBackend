@@ -14,7 +14,8 @@ def random_string(length):
 
 class PharmaCoNERRunner:
     """Helper class to run PharmaCoNER"""
-    def __init__(self, pharmaconer_path, output_path, parameters_path, ok_status_code='ok', id_length=10,
+    def __init__(self, pharmaconer_path, output_path, parameters_path, ok_status_code='Data retrieved successfully.',
+                 id_length=10,
                  clean_files=True):
         self.pharmaconer_path = pharmaconer_path
         self.venv_python_path = os.path.join(pharmaconer_path, 'bin', 'python')
@@ -28,7 +29,7 @@ class PharmaCoNERRunner:
         self.pharmaconer_base_command = self.venv_python_path + ' ' + os.path.join(self.pharmaconer_path, 'src',
                                         'main.py') + ' --parameters_filepath ' + self.parameters_path \
                                         + ' --pretrained_model_folder ' + self.pretrained_model_folder +\
-                                        ' --output_folder ' + output_path +  ' --dataset_text_folder '
+                                        ' --output_folder ' + output_path + ' --dataset_text_folder '
 
     def prepare_data(self, identifier, text):
         """Generate deploy set with the input text"""
@@ -70,8 +71,8 @@ class PharmaCoNERRunner:
             values = line.split()
             entity['id'] = values[0]
             entity['class'] = values[1]
-            entity['start'] = values[2]
-            entity['end'] = values[3]
+            entity['start'] = int(values[2])
+            entity['end'] = int(values[3])
             entity['entity'] = values[4]
             brat.append(entity)
         return brat
@@ -79,7 +80,7 @@ class PharmaCoNERRunner:
     def build_error_dict(self, error):
         """Build dictionary with error message"""
         status = error
-        res = {'status': status, 'data': {}}
+        res = {'success': False, 'data': {}, 'message': status}
         return res
 
     def run(self, text):
@@ -102,7 +103,8 @@ class PharmaCoNERRunner:
         brat = self.ann_text_to_dict(ann)
         time1 = time.time()
         status = self.ok_status_code
-        res = {'status': status, 'data': {'processing_time': str(time1 - time0), 'original_text': text, 'brat': brat}}
+        res = {'success': True, 'data': {'processing_time': str(time1 - time0), 'original_text': text, 'brat': brat},
+               'message': status}
         return res
 
 
