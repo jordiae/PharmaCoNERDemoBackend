@@ -104,7 +104,7 @@ class PharmaCoNERRunner:
         time1 = time.time()
         status = self.ok_status_code
         res = {'success': True, 'data': {'processing_time': str(time1 - time0), 'original_text': text, 'brat': brat},
-               'message': status}
+               'message': status, 'timestamp': time1}
         return res
 
 
